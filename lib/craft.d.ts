@@ -1,5 +1,8 @@
 import {SeomaticContainers} from "./plugins/seomatic/latest";
 
+/*
+ * Generic element type that is extended into Entries, Assets, Users, etc...
+ */
 export interface CraftElement {
   /*
    * Return a number of related elements for a field.
@@ -63,6 +66,9 @@ export interface CraftElement {
   uri?: string;
 }
 
+/*
+ * A file uploaded and managed through Craft CMS’s asset volumes.
+ */
 export interface CraftAsset extends CraftElement {
   /*
    * The date the asset file was last modified.
@@ -138,8 +144,81 @@ export interface CraftAsset extends CraftElement {
   width?: number;
 }
 
+/*
+ * A array of CraftAsset objects.
+ */
 export interface CraftAssets extends Array<CraftAsset> {}
 
+/*
+ * Content used to establish relations between other content; organized by category groups.
+ */
+export interface CraftCategory extends CraftElement {
+  /*
+   * The category’s children.
+   */
+  children?: CraftCategory[];
+  /*
+   * The handle of the group that contains the category.
+   */
+  groupHandle?: string;
+  /*
+   * The ID of the group that contains the category.
+   */
+  groupId?: number;
+  /*
+   * The element’s level within its structure
+   */
+  level?: number;
+  /*
+   * The element’s left position within its structure.
+   */
+  lft?: number;
+  /*
+   * The same element in other locales.
+   */
+  localized?: CraftCategory[];
+  /*
+   * Returns the next element relative to this one, from a given set of criteria.
+   */
+  next?: CraftCategory;
+  /*
+   * The category’s parent.
+   */
+  parent?: CraftCategory;
+  /*
+   * Returns the previous element relative to this one, from a given set of criteria.
+   */
+  prev?: CraftCategory;
+  /*
+   * The element’s right position within its structure.
+   */
+  rgt?: number;
+  /*
+   * The element’s structure’s root ID
+   */
+  root?: number;
+  /*
+   * This query is used to query for SEOmatic meta data.
+   */
+  seomatic?: SeomaticContainers;
+  /*
+   * The element’s structure ID.
+   */
+  structureId?: number;
+  /*
+   * The element’s full URL
+   */
+  url?: string;
+}
+
+/*
+ * A array of CraftCategory objects.
+ */
+export interface CraftCategory extends Array<CraftCategory> {}
+
+/*
+ * Content managed through Craft CMS as single, channel, and structure sections.
+ */
 export interface CraftEntry extends CraftElement {
   /*
    * The entry’s children, if the section is a structure. Accepts the same arguments as the entries query.
@@ -251,8 +330,14 @@ export interface CraftEntry extends CraftElement {
   url?: string;
 }
 
+/*
+ * A array of CraftEntry objects.
+ */
 export interface CraftEntries extends Array<CraftEntry> {}
 
+/*
+ * Global fields managed though Craft CMS.
+ */
 export interface CraftGlobalSet extends CraftElement {
   /*
    * The handle of the global set.
@@ -263,3 +348,69 @@ export interface CraftGlobalSet extends CraftElement {
    */
   name?: string;
 }
+
+/*
+ * Content managed through Craft CMS.
+ */
+export interface CraftTag extends CraftElement {
+  /*
+   * The handle of the group that contains the tag.
+   */
+  groupHandle: string;
+  /*
+   * The ID of the group that contains the tag.
+   */
+  groupId: number;
+}
+
+/*
+ * A array of CraftTag objects.
+ */
+export interface CraftTags extends Array<CraftTag> {}
+
+/*
+ * Content managed through Craft CMS.
+ */
+export interface CraftUser extends CraftElement {
+  /*
+   * The user's email.
+   */
+  email?: string;
+  /*
+   * The user's first name.
+   */
+  firstName?: string;
+  /*
+   * The user's first name or username.
+   */
+  friendlyName?: string;
+  /*
+   * The user's full name.
+   */
+  fullName?: string;
+  /*
+   * The user's last name.
+   */
+  lastName?: string;
+  /*
+   * The user's full name or username.
+   */
+  name?: string;
+  /*
+   * The user’s preferences.
+   */
+  preferences?: string;
+  /*
+   * The user’s preferred language.
+   */
+  preferredLanguage?: string;
+  /*
+   * The username.
+   */
+  username?: string;
+}
+
+/*
+ * A array of CraftUser objects.
+ */
+export interface CraftUsers extends Array<CraftUser> {}

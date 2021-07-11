@@ -1,0 +1,9 @@
+{
+  "name": "craft-types",
+  "author": "Will Browar",
+  "version": "0.0.1",
+  "types": "./lib/craft.d.ts",
+  "scripts": {
+    "test": "tsc ./test/main.ts"
+  }
+}
